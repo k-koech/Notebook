@@ -46,24 +46,17 @@ def index():
 
 @main.route('/pitch/new', methods = ['GET','POST'])
 @login_required
-def pitch(id):
+def pitch():
     if request.method=="POST":
-        category = request.POST['category']
-        pitch = request.POST['pitch']
-        pitch1 = Pitch(category=category, pitch=pitch,  )
-    if form.validate_on_submit():
-        title = form.title.data
-        review = form.review.data
+        category = request.form['category']
+        pitch = request.form['pitch']
+        current_use=request.current_user
+        new_pitch = Pitch(category=category, pitch=pitch, user_id=current_use )
+        db.session.add(new_pitch)
+        db.session.commit()
+        return redirect(url_for('main.index' ))
 
-        # Updated review instance
-        new_review = Review(movie_id=movie.id,movie_title=title,image_path=movie.poster,movie_review=review,user=current_user)
-
-        # save review method
-        new_review.save_review()
-        return redirect(url_for('.movie',id = movie.id ))
-
-    title = f'{movie.title} review'
-    return render_template('new_review.html',title = title, review_form=form, movie=movie)
+    return render_template('index.html')
 # @main.route('/movie/<int:id>')
 # def movie(id):
 

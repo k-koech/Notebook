@@ -16,7 +16,7 @@ class User(UserMixin,db.Model):
     username = db.Column(db.String(255),index = True)
     email = db.Column(db.String(255),unique = True,index = True)
     role_id = db.Column(db.Integer,db.ForeignKey('roles.id'))
-    reviews = db.relationship('Review',backref = 'user',lazy = "dynamic")
+    pitch = db.relationship('Pitch',backref = 'user',lazy = "dynamic")
     bio = db.Column(db.String(255))
     profile_pic_path = db.Column(db.String())
     password_secure = db.Column(db.String(255))
@@ -43,13 +43,13 @@ class Pitch(db.Model):
     id = db.Column(db.Integer,primary_key = True)
     category = db.Column(db.String(70))
     pitch = db.Column(db.Text)
-    user = db.relationship('User',backref = 'role',lazy="dynamic")
+    user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
 
     def __repr__(self):
         return f'User {self.pitch}'
 
 
-class Role(db.Model):
+class Rolek(db.Model):
     __tablename__ = 'roles'
 
     id = db.Column(db.Integer,primary_key = True)
@@ -76,26 +76,29 @@ class Movie:
         self.vote_count = vote_count
 
 
-class Review(db.Model):
+# class Review(db.Model):
 
-    __tablename__ = 'reviews'
+#     __tablename__ = 'reviews'
 
-    id = db.Column(db.Integer,primary_key = True)
-    movie_id = db.Column(db.Integer)
-    movie_title = db.Column(db.String)
-    image_path = db.Column(db.String)
-    movie_review = db.Column(db.String)
-    posted = db.Column(db.DateTime,default=datetime.utcnow)
-    user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
+#     id = db.Column(db.Integer,primary_key = True)
+#     movie_id = db.Column(db.Integer)
+#     movie_title = db.Column(db.String)
+#     image_path = db.Column(db.String)
+#     movie_review = db.Column(db.String)
+#     posted = db.Column(db.DateTime,default=datetime.utcnow)
+#     user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
 
-    def save_review(self):
-        db.session.add(self)
-        db.session.commit()
+#     def save_review(self):
+#         db.session.add(self)
+#         db.session.commit()
 
-    @classmethod
-    def get_reviews(cls,id):
-        reviews = Review.query.filter_by(movie_id=id).all()
-        return reviews
+#     @classmethod
+#     def get_reviews(cls,id):
+#         reviews = Review.query.filter_by(movie_id=id).all()
+#         return reviews
+
+
+
 # class Review:
 
 #     all_reviews = []

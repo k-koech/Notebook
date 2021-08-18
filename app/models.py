@@ -28,7 +28,6 @@ class User(UserMixin,db.Model):
     @password.setter
     def password(self, password):
         self.password_secure = generate_password_hash(password)
-        print("kk")
         return self.password_secure
 
 
@@ -38,13 +37,25 @@ class User(UserMixin,db.Model):
     def __repr__(self):
         return f'User {self.username}'
         
+class Pitch(db.Model):
+    __tablename__ = 'pitches'
+
+    id = db.Column(db.Integer,primary_key = True)
+    category = db.Column(db.String(70))
+    pitch = db.Column(db.Text(70))
+    user = db.relationship('User',backref = 'role',lazy="dynamic")
+
+    def __repr__(self):
+        return f'User {self.name}'
+
 
 class Role(db.Model):
     __tablename__ = 'roles'
 
     id = db.Column(db.Integer,primary_key = True)
     name = db.Column(db.String(255))
-    users = db.relationship('User',backref = 'role',lazy="dynamic")
+    user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
+
 
     def __repr__(self):
         return f'User {self.name}'

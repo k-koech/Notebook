@@ -1,6 +1,6 @@
 from flask import render_template,request,redirect,url_for, abort
 from . import main
-from ..models import  User
+from ..models import  Pitch, User
 from flask_login import login_required, current_user
 from .forms import ReviewForm,UpdateProfile
 from .. import db, photos
@@ -33,7 +33,37 @@ def index():
     else:
         return render_template('index.html', title = title)
 
+# @main.route('/search/<movie_name>')
+# def search(movie_name):
+#     '''
+#     View function to display the search results
+#     '''
+#     movie_name_list = movie_name.split(" ")
+#     movie_name_format = "+".join(movie_name_list)
+#     searched_movies = search_movie(movie_name_format)
+#     title = f'search results for {movie_name}'
+#     return render_template('search.html',movies = searched_movies)
 
+@main.route('/pitch/new', methods = ['GET','POST'])
+@login_required
+def pitch(id):
+    if request.method=="POST":
+        category = request.POST['category']
+        pitch = request.POST['pitch']
+        pitch1 = Pitch(category=category, pitch=pitch,  )
+    if form.validate_on_submit():
+        title = form.title.data
+        review = form.review.data
+
+        # Updated review instance
+        new_review = Review(movie_id=movie.id,movie_title=title,image_path=movie.poster,movie_review=review,user=current_user)
+
+        # save review method
+        new_review.save_review()
+        return redirect(url_for('.movie',id = movie.id ))
+
+    title = f'{movie.title} review'
+    return render_template('new_review.html',title = title, review_form=form, movie=movie)
 # @main.route('/movie/<int:id>')
 # def movie(id):
 
@@ -46,35 +76,7 @@ def index():
 
 #     return render_template('movie.html',title = title,movie = movie,reviews = reviews)
 
-# @main.route('/search/<movie_name>')
-# def search(movie_name):
-#     '''
-#     View function to display the search results
-#     '''
-#     movie_name_list = movie_name.split(" ")
-#     movie_name_format = "+".join(movie_name_list)
-#     searched_movies = search_movie(movie_name_format)
-#     title = f'search results for {movie_name}'
-#     return render_template('search.html',movies = searched_movies)
 
-# @main.route('/movie/review/new/<int:id>', methods = ['GET','POST'])
-# @login_required
-# def new_review(id):
-#     form = ReviewForm()
-#     movie = get_movie(id)
-#     if form.validate_on_submit():
-#         title = form.title.data
-#         review = form.review.data
-
-#         # Updated review instance
-#         new_review = Review(movie_id=movie.id,movie_title=title,image_path=movie.poster,movie_review=review,user=current_user)
-
-#         # save review method
-#         new_review.save_review()
-#         return redirect(url_for('.movie',id = movie.id ))
-
-#     title = f'{movie.title} review'
-#     return render_template('new_review.html',title = title, review_form=form, movie=movie)
 # @main.route('/review/<int:id>')
 # def single_review(id):
 #     review=Review.query.get(id)

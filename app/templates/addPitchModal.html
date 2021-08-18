@@ -9,42 +9,28 @@
       </div>
       <div class="modal-body">
       <!-- start of form -->
-        <form>
+        <form action="/pitch/new" method="POST">
           <div class="form-group">
-            <label>Email address</label>
-            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-          </div>
-          <div class="form-group">
-            <label for="exampleFormControlSelect1">Example select</label>
-            <select class="form-control" id="exampleFormControlSelect1">
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
+            <label for="exampleFormControlSelect2">Category</label>
+            <select class="form-control" name="category" id="exampleFormControlSelect2">
+              <option>Pickup lines</option>
+              <option>Interview pitch</option>
+              <option>Product pitch,</option>
+              <option>Promotion pitch</option>
             </select>
           </div>
           <div class="form-group">
-            <label for="exampleFormControlSelect2">Example multiple select</label>
-            <select multiple class="form-control" id="exampleFormControlSelect2">
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="exampleFormControlTextarea1">Example textarea</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-          </div>
+            <label for="exampleFormControlTextarea1">Pitch</label>
+            <textarea class="form-control" name="pitch" rows="3"></textarea>
+          </div>  
+          <div class="text-center"><button type="button" class="btn btn-primary">Save Pitch</button></div>
         </form>
         <!-- endform -->
 
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+      
       </div>
     </div>
   </div>

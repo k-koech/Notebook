@@ -1,16 +1,14 @@
 {% extends 'base.html'%}
 {% import 'macros.html' as macro%}
 
-{% block styles%}
-    {{ super() }}
-    <link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">
-{% endblock %}
  
 <!-- Content block -->
 {% block content %}
 <div class="container ">
   <div class="row m-3 pt-3">
     <div class="col-md-7">
+        <button type="button" class="btn btn-outline-primary m-1" align="right"><i class="fa fa-plus" aria-hidden="true"></i>
+            Add Pitches</button>
         <div class="card mb-4" >
             <div class="card-body">
                 <div class="row">
@@ -25,13 +23,13 @@
                     </div>
 
                     <div class="col-md-2 text-center">
-                        <div class="bg-darkk votes">
-                            <i class="fa fa-caret-up fa-4x" aria-hidden="true"></i>
-                            <h5>56</h5>  
+                        <div class="votes ">
+                            <i class="fa fa-caret-up fa-4x padding-top-0 text-success" aria-hidden="true"></i>
+                            <h5 >56</h5>  
                         </div>  
-                        <div class="bg-success votes">
-                            <h5>0</h5>
-                            <i class="fa fa-caret-down fa-4x" aria-hidden="true"></i>
+                        <div class="votes ">
+                            <h5 class="m-0 p-0 ">0</h5>
+                            <i class="fa fa-caret-down fa-4x " aria-hidden="true"></i>
                         </div>
                             
                     </div>
@@ -40,13 +38,8 @@
             </div>
           
         </div>
-        <div class="card" >
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-        </div>
+        
+        
     </div>
     <div class="col-md-5 ">
         <h5>Related Pitches</h5>

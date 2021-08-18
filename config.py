@@ -5,7 +5,9 @@ class Config:
     '''
     General configuration parent class
     '''
+    MOVIES_API_KEY = '191743892af9cad7b309cd56ee66ad46'
     SECRET_KEY = '<Flask WTF Secret Key>'
+    MOVIE_API_BASE_URL ='https://api.themoviedb.org/3/movie/{}?api_key={}'
     SECRET_KEY = '<Flask WTF Secret Key>'
     UPLOADED_PHOTOS_DEST ='app/static/photos'
 
@@ -18,11 +20,15 @@ class Config:
     MAIL_PASSWORD ="kelvin97"
 
     
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://postgres:kkkk@localhost/watchlist'
+
+     # simple mde  configurations
+    SIMPLEMDE_JS_IIFE = True
+    SIMPLEMDE_USE_CDN = True
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://postgres:kkkk@localhost/flaskmovie'
 
 
 class TestConfig(Config):
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://postgres:kkkk@localhost/watchlist'
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://postgres:kkkk@localhost/flaskmovie'
  
 class ProdConfig(Config):
     '''

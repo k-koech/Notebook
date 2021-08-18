@@ -42,11 +42,11 @@ class Pitch(db.Model):
 
     id = db.Column(db.Integer,primary_key = True)
     category = db.Column(db.String(70))
-    pitch = db.Column(db.Text(70))
+    pitch = db.Column(db.Text)
     user = db.relationship('User',backref = 'role',lazy="dynamic")
 
     def __repr__(self):
-        return f'User {self.name}'
+        return f'User {self.pitch}'
 
 
 class Role(db.Model):

@@ -6,7 +6,6 @@ from flask_login import LoginManager
 from flask_uploads import UploadSet,configure_uploads,IMAGES,patch_request_class
 
 from flask_mail import Mail
-import os
 
 login_manager = LoginManager()
 login_manager.session_protection = 'strong'
@@ -53,9 +52,7 @@ def create_app(config_name):
     from .main import main as main_blueprint
     app.register_blueprint(main_blueprint)
 
-     # setting config
-    from .requests import configure_request
-    configure_request(app)
+  
 
     return app
 

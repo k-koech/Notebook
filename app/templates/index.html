@@ -11,20 +11,22 @@
             <button type="button" data-toggle="modal" data-target="#PitchModal" class="btn btn-outline-primary m-1 ml-auto" ><i class="fa fa-plus" aria-hidden="true"></i>
             Add Pitches</button>
         </div>
-              
+
+        {% for pitch in pitches %}
         <div class="card mb-4" >
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-10">                           
                         <div class="row">
-                            <span class="badge badge-success  ml-auto">Pickup lines</span>
+                            <span class="badge badge-success  ml-auto">{{ pitch.category}}</span>
                         </div>
                         <h5 class="card-text mt-4">
-                            I hope you know CPR, because you just took my breath away!
+                            {{ pitch.pitch }}
                         </h5>
                         <div class="row mt-5">
-                            <div class="col-md-4 text-center"><i class="fa fa-comments fa-2x" aria-hidden="true"></i></div>
-                            <div class="col-md-7"><button class="btn">Leave feedback</button></div>
+                            <div class="col-md-4"><button class="btn">By {{ pitch.user_id }}</button></div>
+                            <div class="col-md-2 text-center">30<i class="fa fa-comments fa-2x" aria-hidden="true"></i></div>
+                            <div class="col-md-5"><button class="btn">Leave feedback</button></div>
                         </div>
                     </div>
 
@@ -48,6 +50,7 @@
             {% endblock %}
           
         </div>
+        {% endfor %}
         
         
     </div>

@@ -25,13 +25,10 @@ def index():
 
 
     title = 'Home - Welcome to The best Movie Review Website Online'
-
-    search_movie = request.args.get('movie_query')
-
-    if search_movie:
-        return redirect(url_for('main.search',movie_name=search_movie))
-    else:
-        return render_template('index.html', title = title)
+  
+    pitches= Pitch.query.all()
+    print(pitches)
+    return render_template('index.html', title = title, pitches=pitches)
 
 # @main.route('/search/<movie_name>')
 # def search(movie_name):
@@ -50,10 +47,11 @@ def pitch():
     if request.method=="POST":
         category = request.form['category']
         pitch = request.form['pitch']
-        current_use=request.current_user
-        new_pitch = Pitch(category=category, pitch=pitch, user_id=current_use )
+        new_pitch = Pitch(category=category, pitch=pitch, user_id=current_user.id )
         db.session.add(new_pitch)
         db.session.commit()
+        return redirect(url_for('main.index' ))
+    else:
         return redirect(url_for('main.index' ))
 
     return render_template('index.html')

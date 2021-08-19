@@ -1,7 +1,5 @@
 {% extends 'base.html'%}
-{% import 'macros.html' as macro%}
 
- 
 <!-- Content block -->
 {% block content %}
 <div class="container ">
@@ -10,6 +8,9 @@
         <div class="add-btn">
             <button type="button" data-toggle="modal" data-target="#PitchModal" class="btn btn-outline-primary m-1 ml-auto" ><i class="fa fa-plus" aria-hidden="true"></i>
             Add Pitches</button>
+            {% block addPitchmodal %}
+               {% include 'addPitchModal.html' %}
+            {% endblock %}
         </div>
 
         {% for pitch in pitches %}
@@ -45,9 +46,7 @@
                
             </div>
 
-            {% block AddPitchmodal %}
-               {% include 'addPitchModal.html' %}
-            {% endblock %}
+           
           
         </div>
         {% endfor %}
@@ -67,5 +66,9 @@
     
   </div>
 </div>
+
+
+
+
 
 {% endblock%}

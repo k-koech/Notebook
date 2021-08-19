@@ -1,6 +1,6 @@
 from flask import render_template,request,redirect,url_for, abort
 from . import main
-from ..models import  Pitch, User
+from ..models import  Pitch, User, Upvote, Downvote
 from flask_login import login_required, current_user
 from .forms import ReviewForm,UpdateProfile
 from .. import db, photos
@@ -27,7 +27,6 @@ def index():
     title = 'Home - Welcome to The best Movie Review Website Online'
   
     pitches= Pitch.query.all()
-    print(pitches)
     return render_template('index.html', title = title, pitches=pitches)
 
 # @main.route('/search/<movie_name>')
@@ -54,18 +53,27 @@ def pitch():
     else:
         return redirect(url_for('main.index' ))
 
-    return render_template('index.html')
-# @main.route('/movie/<int:id>')
-# def movie(id):
 
-#     '''
-#     View movie page function that returns the movie details page and its data
-#     '''   
-#     movie = get_movie(id)
-#     title = f'{movie.title}'
-#     reviews = Review.get_reviews(movie.id)
+@main.route('/upvote/<id>', methods = ['GET','POST'])
+@login_required
+def upvote(id):
+    '''
+    View movie page function that returns the movie details page and its data
+    '''   
+    if request.method=="POST":
+        get_upvotes = Upvote.query.filter_by(pitch_id=id).first_or_404()
+        votes = int(get_upvotes.votes)+2
+        print(get_upvotes)
 
-#     return render_template('movie.html',title = title,movie = movie,reviews = reviews)
+        pitch_id = id
+        newUpvote = User.query.filter_by(id = 1).update({"username": "James Muriuki"})
+
+        newUpvote = Upvote(pitch_id = pitch_id, votes=10, user_id=current_user.id)
+        db.session.add(newUpvote)
+        db.session.commit()
+        return redirect(url_for('main.index' ))
+
+    return redirect(url_for('main.index' ))
 
 
 # @main.route('/review/<int:id>')

@@ -46,7 +46,7 @@ class Pitch(db.Model):
     user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
 
     def __repr__(self):
-        return f'User {self.pitch}'
+        return f'Pitch {self.pitch}'
 
 
 class Upvote(db.Model):
@@ -58,7 +58,7 @@ class Upvote(db.Model):
     user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
 
     def __repr__(self):
-        return f'User {self.votes}'
+        return f'Upvote {self.votes}'
 
 
 class Downvote(db.Model):

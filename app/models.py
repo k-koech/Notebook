@@ -39,10 +39,10 @@ class User(UserMixin,db.Model):
         
 class Pitch(db.Model):
     __tablename__ = 'pitches'
-
     id = db.Column(db.Integer,primary_key = True)
     category = db.Column(db.String(70))
     pitch = db.Column(db.Text)
+    date_posted = db.Column(db.DateTime,default=datetime.utcnow)
     upvotes = db.Column(db.Integer, default=0)
     downvotes = db.Column(db.Integer, default=0)
     user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
@@ -50,30 +50,43 @@ class Pitch(db.Model):
     def __repr__(self):
         return f'Pitch {self.pitch}'
 
-
-class Upvote(db.Model):
-    __tablename__ = 'upvotes'
-
+        
+class Comments(db.Model):
+    __tablename__ = 'pitches'
     id = db.Column(db.Integer,primary_key = True)
-    pitch_id = db.Column(db.Integer)
-    votes = db.Column(db.String(70))
+    category = db.Column(db.String(70))
+    pitch = db.Column(db.Text)
+    date_posted = db.Column(db.DateTime,default=datetime.utcnow)
+    upvotes = db.Column(db.Integer, default=0)
+    downvotes = db.Column(db.Integer, default=0)
     user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
 
     def __repr__(self):
-        return f'Upvote {self.votes}'
+        return f'Pitch {self.pitch}'
+
+# class Upvote(db.Model):
+#     __tablename__ = 'upvotes'
+
+#     id = db.Column(db.Integer,primary_key = True)
+#     pitch_id = db.Column(db.Integer)
+#     votes = db.Column(db.String(70))
+#     user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
+
+#     def __repr__(self):
+#         return f'Upvote {self.votes}'
 
 
-class Downvote(db.Model):
-    __tablename__ = 'downvotes'
+# class Downvote(db.Model):
+#     __tablename__ = 'downvotes'
 
-    id = db.Column(db.Integer,primary_key = True)
-    pitch_id = db.Column(db.Integer)
-    votes = db.Column(db.String(70))
-    user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
+#     id = db.Column(db.Integer,primary_key = True)
+#     pitch_id = db.Column(db.Integer)
+#     votes = db.Column(db.String(70))
+#     user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
 
 
-    def __repr__(self):
-        return f'User {self.votes}'
+#     def __repr__(self):
+#         return f'User {self.votes}'
 
 
 

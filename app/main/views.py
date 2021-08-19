@@ -1,6 +1,7 @@
-from flask import render_template,request,redirect,url_for, abort
+from flask import render_template,request,redirect,url_for, abort, flash
 from . import main
-from ..models import  Pitch, User, Upvote, Downvote
+from sqlalchemy import asc
+from ..models import  Pitch, User, Comments
 from flask_login import login_required, current_user
 from .forms import ReviewForm,UpdateProfile
 from .. import db, photos
@@ -25,8 +26,7 @@ def index():
 
 
     title = 'Home - Welcome to The best Movie Review Website Online'
-  
-    pitches= Pitch.query.all()
+    pitches= Pitch.query.order_by(Pitch.id.asc())
     print(pitches)
     return render_template('index.html', title = title, pitches=pitches)
 
@@ -50,6 +50,7 @@ def pitch():
         new_pitch = Pitch(category=category, pitch=pitch, user_id=current_user.id )
         db.session.add(new_pitch)
         db.session.commit()
+        flash('Saved successful')
         return redirect(url_for('main.index' ))
     else:
         return redirect(url_for('main.index' ))
@@ -80,11 +81,11 @@ def downvote(id):
     View movie page function that returns the movie details page and its data
     '''   
     if request.method=="POST":
-        get_downvotes = Downvote.query.filter_by(pitch_id=id).first_or_404()
-        votes = int(get_downvotes.votes)-1
+        get_downvotes = Pitch.query.filter_by(id=id).first_or_404()
+        votes = get_downvotes.downvotes-1
+        print(get_downvotes)
 
-        pitch_id = id
-        Downvote.query.filter_by(pitch_id=id).update({"votes": votes})
+        newUpvote = Pitch.query.filter_by(id=id).update({"downvotes": votes})
         db.session.commit()
         return redirect(url_for('main.index' ))
 

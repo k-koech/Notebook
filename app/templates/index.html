@@ -12,12 +12,17 @@
                {% include 'addPitchModal.html' %}
             {% endblock %}
         </div>
-
+        <div class="">
+            {% for message in get_flashed_messages() %}
+                <div class="alert alert-success flash">{{ message }}</div>
+            {% endfor %}
+        </div> 
         {% for pitch in pitches %}
         <div class="card mb-4" >
             <div class="card-body">
                 <div class="row">
-                    <div class="col-md-10">                           
+                    <div class="col-md-10"> 
+                                                 
                         <div class="row">
                             <span class="badge badge-success  ml-auto">{{ pitch.category}}</span>
                         </div>

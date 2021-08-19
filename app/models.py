@@ -49,6 +49,34 @@ class Pitch(db.Model):
         return f'User {self.pitch}'
 
 
+class Upvote(db.Model):
+    __tablename__ = 'upvotes'
+
+    id = db.Column(db.Integer,primary_key = True)
+    category = db.Column(db.String(70))
+    pitch_id = db.Column(db.Integer)
+    votes = db.Column(db.String(70))
+    user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
+
+    def __repr__(self):
+        return f'User {self.votes}'
+
+
+class Downvote(db.Model):
+    __tablename__ = 'downvotes'
+
+    id = db.Column(db.Integer,primary_key = True)
+    category = db.Column(db.String(70))
+    pitch_id = db.Column(db.Integer)
+    votes = db.Column(db.String(70))
+    user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
+
+
+    def __repr__(self):
+        return f'User {self.votes}'
+
+
+
 class Rolek(db.Model):
     __tablename__ = 'roles'
 
@@ -98,36 +126,3 @@ class Movie:
 #         return reviews
 
 
-
-# class Review:
-
-#     all_reviews = []
-
-#     def __init__(self,movie_id,title,imageurl,review):
-#         self.movie_id = movie_id
-#         self.title = title
-#         self.imageurl = imageurl
-#         self.review = review
-
-
-#     def save_review(self):
-#         Review.all_reviews.append(self)
-
-
-#     @classmethod
-#     def clear_reviews(cls):
-#         Review.all_reviews.clear()
-
-#     @classmethod
-#     def get_reviews(cls,id):
-
-#         response = []
-
-#         for review in cls.all_reviews:
-#             if review.movie_id == id:
-#                 response.append(review)
-
-#         return response
-
-
- 

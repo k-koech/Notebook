@@ -53,7 +53,6 @@ class Upvote(db.Model):
     __tablename__ = 'upvotes'
 
     id = db.Column(db.Integer,primary_key = True)
-    category = db.Column(db.String(70))
     pitch_id = db.Column(db.Integer)
     votes = db.Column(db.String(70))
     user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
@@ -66,7 +65,6 @@ class Downvote(db.Model):
     __tablename__ = 'downvotes'
 
     id = db.Column(db.Integer,primary_key = True)
-    category = db.Column(db.String(70))
     pitch_id = db.Column(db.Integer)
     votes = db.Column(db.String(70))
     user_id = db.Column(db.Integer,db.ForeignKey("users.id"))

@@ -18,7 +18,7 @@ class User(UserMixin,db.Model):
     role_id = db.Column(db.Integer,db.ForeignKey('roles.id'))
     pitches = db.relationship('Pitch',backref = 'user',lazy = "dynamic")
     bio = db.Column(db.String(255))
-    profile_pic_path = db.Column(db.String())
+    profile_pic_path = db.Column(db.String(80))
     password_secure = db.Column(db.String(255))
 
     @property
@@ -52,18 +52,23 @@ class Pitch(db.Model):
 
         
 class Comments(db.Model):
-    __tablename__ = 'pitches'
+    __tablename__ = 'comments'
     id = db.Column(db.Integer,primary_key = True)
-    category = db.Column(db.String(70))
-    pitch = db.Column(db.Text)
+    comment = db.Column(db.Text)
     date_posted = db.Column(db.DateTime,default=datetime.utcnow)
-    upvotes = db.Column(db.Integer, default=0)
-    downvotes = db.Column(db.Integer, default=0)
-    user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
 
     def __repr__(self):
-        return f'Pitch {self.pitch}'
+        return f'Comment {self.pitch}'
 
+class Feedback(db.Model):
+    __tablename__ = 'feedback'
+    id = db.Column(db.Integer,primary_key = True)
+    title = db.Column(db.String(100))
+    feedback = db.Column(db.Text)
+    date_posted = db.Column(db.DateTime,default=datetime.utcnow)
+
+    def __repr__(self):
+        return f'Feedback {self.pitch}'
 # class Upvote(db.Model):
 #     __tablename__ = 'upvotes'
 

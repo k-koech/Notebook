@@ -66,7 +66,7 @@ def upvote(id):
         print(get_upvotes)
 
         pitch_id = id
-        newUpvote = User.query.filter_by(id = 1).update({"username": "James Muriuki"})
+        newUpvote = Upvote.query.filter_by(pitch_id=id).update({"votes": votes})
 
         newUpvote = Upvote(pitch_id = pitch_id, votes=10, user_id=current_user.id)
         db.session.add(newUpvote)

@@ -27,6 +27,7 @@ def index():
     title = 'Home - Welcome to The best Movie Review Website Online'
   
     pitches= Pitch.query.all()
+    print(pitches)
     return render_template('index.html', title = title, pitches=pitches)
 
 # @main.route('/search/<movie_name>')
@@ -61,20 +62,33 @@ def upvote(id):
     View movie page function that returns the movie details page and its data
     '''   
     if request.method=="POST":
-        get_upvotes = Upvote.query.filter_by(pitch_id=id).first_or_404()
-        votes = int(get_upvotes.votes)+2
+        get_upvotes = Pitch.query.filter_by(id=id).first_or_404()
+        votes = get_upvotes.upvotes+1
         print(get_upvotes)
 
-        pitch_id = id
-        newUpvote = Upvote.query.filter_by(pitch_id=id).update({"votes": votes})
-
-        newUpvote = Upvote(pitch_id = pitch_id, votes=10, user_id=current_user.id)
-        db.session.add(newUpvote)
+        newUpvote = Pitch.query.filter_by(id=id).update({"upvotes": votes})
         db.session.commit()
         return redirect(url_for('main.index' ))
 
     return redirect(url_for('main.index' ))
 
+
+@main.route('/downvote/<id>', methods = ['GET','POST'])
+@login_required
+def downvote(id):
+    '''
+    View movie page function that returns the movie details page and its data
+    '''   
+    if request.method=="POST":
+        get_downvotes = Downvote.query.filter_by(pitch_id=id).first_or_404()
+        votes = int(get_downvotes.votes)-1
+
+        pitch_id = id
+        Downvote.query.filter_by(pitch_id=id).update({"votes": votes})
+        db.session.commit()
+        return redirect(url_for('main.index' ))
+
+    return redirect(url_for('main.index' ))
 
 # @main.route('/review/<int:id>')
 # def single_review(id):

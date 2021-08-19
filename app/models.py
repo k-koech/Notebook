@@ -43,6 +43,8 @@ class Pitch(db.Model):
     id = db.Column(db.Integer,primary_key = True)
     category = db.Column(db.String(70))
     pitch = db.Column(db.Text)
+    upvotes = db.Column(db.Integer, default=0)
+    downvotes = db.Column(db.Integer, default=0)
     user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
 
     def __repr__(self):

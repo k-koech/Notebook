@@ -36,10 +36,10 @@
                             <form action="/upvote/{{pitch.id}}" method="POST">
                                <button class="btn" type="submit"><i class="fa fa-caret-up fa-4x padding-top-0 text-success" aria-hidden="true"></i> </button> 
                             </form>
-                            <h5 >56</h5>  
+                            <h5 >{{pitch.upvotes}}</h5>  
                         </div>  
                         <div class="votes ">
-                            <h5 class="m-0 p-0 ">0</h5>
+                            <h5 class="m-0 p-0 ">{{pitch.downvotes}}</h5>
                             <form action="/downvote/{{pitch.id}}" method="POST">
                                 <button class="btn" type="submit"><i class="fa fa-caret-down fa-4x " aria-hidden="true"></i></button>
                             </form>

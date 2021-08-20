@@ -1,0 +1,51 @@
+<div class="row">
+    <div class="col-md-10"> 
+                                 
+        <div class="row">
+            <span class="badge badge-success  ml-auto">{{ pitch.category}}</span>
+        </div>
+        <h5 class="card-text mt-4 font-weight-1000" style="position: relative;"> 
+            <i class="fa fa-quote-left"  aria-hidden="true"></i>
+              <span class="pitch">{{ pitch.pitch }}</span>
+              <i class="fa fa-quote-right fa-" aria-hidden="true"></i>
+        </h5>
+        <div class="row mt-5">
+            <div class="col-md-6"><button class="btn">{{ pitch.date_posted.strftime('%Y-%m-%d') }}</button></div>
+            <div class="col-md-6"><button class="btn"><i>Posted by </i>{{ pitch.user.username }}</button></div>    
+        </div>
+       
+        <p class="commentBtn">Comments <i class="fa fa-caret-down" aria-hidden="true"></i></p>
+        <div id="comments" class="row ">
+                         
+            <form  method="POST" action="/comment/{{ pitch.id }}">
+                <p>
+                    <textarea class="textarea" name="comment" role="textbox" placeholder="Enter your comment" contenteditable></textarea>
+                </p> 
+                <div class="d-flex justify-content-end">
+                    <button type="submit" class="btn btn-secondary">Submit</button>
+                </div> 
+            </form>
+             {% for comment in comments %}
+                {% if comment.pitch_id==pitch.id %}
+                  <div class="row bg-light">{{ comment.comment }}</div>  
+                {% endif %}
+             {% endfor %}                               
+         </div>      
+    </div>    
+
+    <div class="col-md-2 text-center">
+        <div class="votes ">
+            <form action="/upvote/{{pitch.id}}" method="POST">
+               <button class="btn" type="submit"><i class="fa fa-caret-up fa-3x padding-top-0 text-success" aria-hidden="true"></i> </button> 
+            </form>
+            <h6 >{{pitch.upvotes}}</h6>  
+        </div>  
+        <div class="votes">
+            <h6 class="m-0 p-0 ">{{pitch.downvotes}}</h6>
+            <form action="/downvote/{{pitch.id}}" method="POST">
+                <button class="btn" type="submit"><i class="fa fa-caret-down fa-3x " aria-hidden="true"></i></button>
+            </form>
+        </div>
+            
+    </div>
+</div>

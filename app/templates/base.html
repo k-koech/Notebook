@@ -39,6 +39,10 @@
    align-items: center;
    justify-content: center;
  }
+ .landing-page .row1 .landing-image
+ {
+   display: none;
+ }
  .landing-page .row1 img
  {
    height: 90%;
@@ -54,6 +58,39 @@ html
 {
   scroll-behavior: smooth;
 }
+.alert-fixed 
+{
+    position:fixed; 
+    left: 50%;
+    text-align: center;
+    transform: translate(-50%, 0);
+    top: 0px; 
+    width: 25%;
+    z-index:9999; 
+    border-radius:0px
+}
+.list-group-item:hover
+{
+   cursor: pointer;
+   color: rgb(87, 0, 0);
+}
+#pickup-lines
+{
+  display: none;
+}
+#interview-lines
+{
+  display: none;
+}
+#product-pitches
+{
+ display: none;
+}
+#promotion-pitches
+{
+  display: none;
+}
+
 .votes
 {
   justify-content: center;
@@ -65,18 +102,39 @@ html
     display: flex;
     align-items: flex-end;
 }
-
+.pitch
+{
+  font-size: 30px;
+}
+.fa-quote-left
+{
+  font-size:15px;
+  position: absolute; 
+  top: -10px;
+  left: -15px;
+  color: #1d1d1d;
+}
+.fa-quote-right
+{
+  font-size:15px;
+  top: -10px;
+  position: relative;
+  color: #1d1d1d;
+}
 #comments
 {
   display: none;
   padding-left: 1em;
 }
-#commentBtn
+.commentBtn
 {
-  cursor: pointer;
   color: rgb(73, 73, 73);
 }
-
+.commentBtn:hover
+{
+  cursor: pointer;
+  color: #1a0404;
+}
 .textarea 
 {
   display: block;
@@ -235,8 +293,68 @@ box-shadow: none !important;
 
         <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
-    
+  <script>
+    $(document).ready(function()
+    {
+        $(".landing-image").slideDown("1000")
+    })
 
+    // picking categories 
+    $(document).ready(function()
+    {
+      $(".all-categories-btn").click(function(){
+        $("#general-pitches").fadeIn();
+        $("#pickup-lines").fadeOut();
+        $("#interview-lines").fadeOut();
+        $("#promotion-pitches").fadeOut();
+        $("#product-pitches").fadeOut();
+      });
+    });
+
+    $(document).ready(function()
+    {
+      $(".pickup-btn").click(function(){
+        $("#pickup-lines").fadeIn();
+        $("#general-pitches").fadeOut();
+        $("#interview-lines").fadeOut();
+        $("#promotion-pitches").fadeOut();
+        $("#product-pitches").fadeOut();
+      });
+    });
+
+    $(document).ready(function()
+    {
+      $(".interview-btn").click(function(){
+        $("#interview-lines").fadeIn();
+        $("#general-pitches").fadeOut();
+        $("#pickup-lines").fadeOut();
+        $("#promotion-pitches").fadeOut();
+        $("#product-pitches").fadeOut();
+      });
+    });
+    
+    $(document).ready(function()
+    {
+      $(".promotion-btn").click(function(){
+        $("#promotion-pitches").fadeIn();
+        $("#general-pitches").fadeOut();
+        $("#interview-lines").fadeOut();
+        $("#pickup-lines").fadeOut();
+        $("#product-pitches").fadeOut();
+      });
+    });
+
+    $(document).ready(function()
+    {
+      $(".product-btn").click(function(){
+        $("#product-pitches").fadeIn();
+        $("#general-pitches").fadeOut();
+        $("#promotion-pitches").fadeOut();
+        $("#interview-lines").fadeOut();
+        $("#pickup-lines").fadeOut();
+      });
+    });
+  </script>
         <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
 
     </body>

@@ -6,3 +6,7 @@ $(document).ready(function(){
     });
 });
 
+$(document).ready(function()
+{
+    $(".col1").fadeIn("1000")
+})

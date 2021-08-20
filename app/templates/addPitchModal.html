@@ -12,7 +12,8 @@
         <form method="POST" action="/pitch/new" >
           <div class="form-group">
             <label>Category</label>
-            <select class="form-control" name="category" id="exampleFormControlSelect2">
+            <select class="form-control" required name="category" id="exampleFormControlSelect2">
+              <option value="">Select Category</option>
               <option value="Pickup lines">Pickup lines</option>
               <option value="Interview pitch">Interview pitch</option>
               <option value="Product pitch">Product pitch</option>
@@ -21,7 +22,7 @@
           </div>
           <div class="form-group">
             <label for="exampleFormControlTextarea1">Pitch</label>
-            <textarea class="form-control" name="pitch" rows="3"></textarea>
+            <textarea class="form-control" required name="pitch" rows="3"></textarea>
           </div>  
           <div class="text-center"><button type="submit" class="btn btn-primary">Save Pitch</button></div>
         </form>

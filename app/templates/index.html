@@ -11,92 +11,82 @@
   <div class="row m-3 pt-3">
     <div class="col-md-7">
         <div class="add-btn">
-            <button type="button" data-toggle="modal" data-target="#PitchModal" class="btn btn-outline-primary m-1 ml-auto" ><i class="fa fa-plus" aria-hidden="true"></i>
+            <button type="button" data-toggle="modal" data-target="#PitchModal" class="btn btn-outline-primary m-1 ml-auto" >
             Add Pitches</button>
             {% block addPitchmodal %}
-               {% include 'addPitchModal.html' %}
+                {% include 'addPitchModal.html' %}
             {% endblock %}
         </div>
-        <div class="">
+        <div class="alert-fixed">
             {% for message in get_flashed_messages() %}
-                <div class="alert alert-success flash">{{ message }}</div>
+                <div class="barge alert-success flash">{{ message }}</div>
             {% endfor %}
         </div> 
-        {% for pitch in pitches %}
-        <div class="card mb-4" >
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-10"> 
-                                                 
-                        <div class="row">
-                            <span class="badge badge-success  ml-auto">{{ pitch.category}}</span>
-                        </div>
-                        <h5 class="card-text mt-4 font-weight-1000">
-                            {{ pitch.pitch }}
-                        </h5>
-                        <div class="row mt-5">
-                            <div class="col-md-4"><button class="btn">{{ pitch.date_posted.strftime('%Y-%m-%d') }}</button></div>
-                            <div class="col-md-4"><button class="btn">By {{ pitch.user.username }}</button></div>
-                            <div class="col-md-2 text-center">
-                                <button class="btn commentBtn">
-                                    <i class="fa fa-comments fa-2x btn" aria-hidden="true"></i>
-                                </button>
-                                
-                            </div>
-                        </div>
-                       
-                        <p class="commentBtn">Comments</p>
-                        <div id="comments" class="row ">
-                                         
-                            <form  method="POST" action="/comment/{{ pitch.id }}">
-                                <p>
-                                    <textarea class="textarea" name="comment" role="textbox" placeholder="Enter your comment" contenteditable></textarea>
-                                </p> 
-                                <div class="d-flex justify-content-end">
-                                    <button type="submit" class="btn btn-secondary">Submit</button>
-                                </div> 
-                            </form>
-                             {% for comment in comments %}
-                                {% if comment.pitch_id==pitch.id %}
-                                  <div class="row bg-light">{{ comment.comment }}</div>  
-                                {% endif %}
-                             {% endfor %}                               
-                         </div>      
-                    </div>    
 
-                    <div class="col-md-2 text-center">
-                        <div class="votes ">
-                            <form action="/upvote/{{pitch.id}}" method="POST">
-                               <button class="btn" type="submit"><i class="fa fa-caret-up fa-3x padding-top-0 text-success" aria-hidden="true"></i> </button> 
-                            </form>
-                            <h6 >{{pitch.upvotes}}</h6>  
-                        </div>  
-                        <div class="votes ">
-                            <h6 class="m-0 p-0 ">{{pitch.downvotes}}</h6>
-                            <form action="/downvote/{{pitch.id}}" method="POST">
-                                <button class="btn" type="submit"><i class="fa fa-caret-down fa-3x " aria-hidden="true"></i></button>
-                            </form>
-                        </div>
-                            
+        <div id="general-pitches">
+            <h5 class="font-weight-bold">All Pitches</h5>
+            {% for pitch in pitches %}
+                <div class="card mb-4" >
+                    <div class="card-body">
+                                {% include 'pitches.html' %}
                     </div>
                 </div>
-            </div>
-            
-           
-          
+            {% endfor %}
         </div>
-        {% endfor %}
+        <div id="pickup-lines">
+            <h5 class="font-weight-bold">Pickup Lines</h5>
+            {% for pitch in pickup_pitches %}
+                <div class="card mb-4" >
+                    <div class="card-body">
+                                {% include 'pitches.html' %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div id="interview-lines">
+            <h5 class="font-weight-bold">Interview Pitch</h5>
+            {% for pitch in interview_pitches %}
+                <div class="card mb-4" >
+                    <div class="card-body">
+                        {% include 'pitches.html' %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div id="product-pitches">
+            <h5 class="font-weight-bold">Product Pitches</h5>
+            {% for pitch in product_pitches %}
+                <div class="card mb-4" >
+                    <div class="card-body">
+                        {% include 'pitches.html' %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div id="promotion-pitches">
+            <h5 class="font-weight-bold">Promotion Pitches</h5>
+            {% for pitch in promotion_pitches %}
+                <div class="card mb-4" >
+                    <div class="card-body">
+                        {% include 'pitches.html' %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
         
         
     </div>
-    <div class="col-md-5 ">
-        <h5>Related Pitches</h5>
+    <div class="col-md-5 mt-3">
+        <h5 class="font-weight-bold">Pitch Categories</h5>
         <ul class="list-group">
-            <li class="list-group-item">Cras justo odio</li>
-            <li class="list-group-item">Dapibus ac facilisis in</li>
-            <li class="list-group-item">Morbi leo risus</li>
-            <li class="list-group-item">Porta ac consectetur ac</li>
-            <li class="list-group-item">Vestibulum at eros</li>
+            <li class="list-group-item all-categories-btn">All Categories</li>
+            <li class="list-group-item pickup-btn">Pickup Lines</li>
+            <li class="list-group-item interview-btn">Interview pitch</li>
+            <li class="list-group-item product-btn">Product pitch</li>
+            <li class="list-group-item promotion-btn">Promotion pitch</li>
+            <li class="list-group-item" data-toggle="modal" data-target="#PitchModal"><i class="fa fa-plus" aria-hidden="true"></i> Add my Pitch</li>
           </ul>
     </div>
     

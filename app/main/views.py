@@ -5,19 +5,9 @@ from ..models import  Feedback, Pitch, User, Comments
 from flask_login import login_required, current_user
 from .forms import ReviewForm,UpdateProfile
 from .. import db, photos
-import markdown2
-
 
 
 # Views
-@main.route('/user/<uname>')
-def profile(uname):
-    user = User.query.filter_by(username = uname).first()
-    if user is None:
-        abort(404)
-    return render_template("profile/profile.html", user = user)
-
-
 @main.route('/')
 def index():
     '''
@@ -25,20 +15,25 @@ def index():
     '''
     title = 'Home - Welcome to One Minute Pitches'
     pitches= Pitch.query.order_by(Pitch.id.asc())
+    pickup_pitches= Pitch.query.filter_by(category="Pickup lines").all()
+    interview_pitches= Pitch.query.filter_by(category="Interview pitch").all()
+    product_pitches= Pitch.query.filter_by(category="Product pitch").all()
+    promotion_pitches= Pitch.query.filter_by(category="Promotion pitch").all()
+    
     comments = Comments.query.all()
     print(pitches)
-    return render_template('index.html', title = title, pitches=pitches, comments=comments)
+    return render_template('index.html', title = title, pitches=pitches, comments=comments,pickup_pitches=pickup_pitches,interview_pitches=interview_pitches,
+    product_pitches=product_pitches,promotion_pitches=promotion_pitches )
 
-# @main.route('/search/<movie_name>')
-# def search(movie_name):
-#     '''
-#     View function to display the search results
-#     '''
-#     movie_name_list = movie_name.split(" ")
-#     movie_name_format = "+".join(movie_name_list)
-#     searched_movies = search_movie(movie_name_format)
-#     title = f'search results for {movie_name}'
-#     return render_template('search.html',movies = searched_movies)
+
+@main.route('/user/<uname>')
+def profile(uname):
+    title = uname
+    user = User.query.filter_by(username = uname).first()
+    if user is None:
+        abort(404)
+    return render_template("profile/profile.html", user = user, title=title)
+
 
 @main.route('/pitch/new', methods = ['GET','POST'])
 @login_required
@@ -66,7 +61,7 @@ def comment(id):
         new_comment = Comments(pitch_id=id, comment=comment, user_id=current_user.id )
         db.session.add(new_comment)
         db.session.commit()
-        flash('Comment posted')
+        flash('Comment saved')
         return redirect(url_for('main.index' ))
     return redirect(url_for('main.index' ))
 

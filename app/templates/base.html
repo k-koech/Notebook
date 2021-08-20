@@ -11,8 +11,47 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"  />
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/index.css', v=0.01)}}">
     <style>
+.votes
+{
+  justify-content: center;
+  align-items: center;
+}
 
 
+.add-btn
+{
+    display: flex;
+    align-items: flex-end;
+}
+
+#comments
+{
+  display: none;
+  padding-left: 1em;
+}
+#commentBtn
+{
+  cursor: pointer;
+  color: rgb(73, 73, 73);
+}
+
+.textarea 
+{
+  display: block;
+  width: 100% !important;
+  overflow: hidden;
+  resize: none;
+  min-height: 40px;
+  line-height: 20px;
+  padding: 5px;
+  border: none !important;
+  background-color: rgb(204, 204, 204);
+}
+
+.textarea[contenteditable]:empty::before {
+  content: "Enter your comment";
+  color: gray;
+}
     </style>
     </head>
     <body>
@@ -27,10 +66,12 @@
 
         {% endblock%}
 
+        {% block navbar %}
+          {% include 'navbar.html' %}
+        {% endblock %}
         <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
-       
-     
+    
 
         <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
 

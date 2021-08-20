@@ -54,7 +54,9 @@ class Pitch(db.Model):
 class Comments(db.Model):
     __tablename__ = 'comments'
     id = db.Column(db.Integer,primary_key = True)
+    pitch_id = db.Column(db.Integer,db.ForeignKey("pitches.id"))
     comment = db.Column(db.Text)
+    user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
     date_posted = db.Column(db.DateTime,default=datetime.utcnow)
 
     def __repr__(self):
@@ -65,6 +67,7 @@ class Feedback(db.Model):
     id = db.Column(db.Integer,primary_key = True)
     title = db.Column(db.String(100))
     feedback = db.Column(db.Text)
+    user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
     date_posted = db.Column(db.DateTime,default=datetime.utcnow)
 
     def __repr__(self):

@@ -36,15 +36,28 @@
                                 <button class="btn commentBtn">
                                     <i class="fa fa-comments fa-2x btn" aria-hidden="true"></i>
                                 </button>
-                                <div id="comments" class="comments bg-dark">
-                                    sevs
-                                </div>
+                                
                             </div>
                         </div>
-                        <div id="comments" class="row bg-dark">
-                            sevsfgbxbsrgsegrsdrgsevsfgbxbsrgsegrsdrgsevsfgbxbsrgsegrsdrgsevsfgbxbsrgsegrsdrgv
-                        </div> 
-                    </div>
+                       
+                        <p class="commentBtn">Comments</p>
+                        <div id="comments" class="row ">
+                                         
+                            <form  method="POST" action="/comment/{{ pitch.id }}">
+                                <p>
+                                    <textarea class="textarea" name="comment" role="textbox" placeholder="Enter your comment" contenteditable></textarea>
+                                </p> 
+                                <div class="d-flex justify-content-end">
+                                    <button type="submit" class="btn btn-secondary">Submit</button>
+                                </div> 
+                            </form>
+                             {% for comment in comments %}
+                                {% if comment.pitch_id==pitch.id %}
+                                  <div class="row bg-light">{{ comment.comment }}</div>  
+                                {% endif %}
+                             {% endfor %}                               
+                         </div>      
+                    </div>    
 
                     <div class="col-md-2 text-center">
                         <div class="votes ">
@@ -62,13 +75,13 @@
                             
                     </div>
                 </div>
-
-                <div id="comments" class="row bg-dark">
-                    sevsfgbxbsrgsegrsdrgsevsfgbxbsrgsegrsdrgsevsfgbxbsrgsegrsdrgsevsfgbxbsrgsegrsdrgv
-                </div>      
-               
+     
+                <div id="comments" class="row ">
+                  <h1>Kelvin Koech</h1>
+                  sevsfgbxbsrgsegrsdrgs  evsfgbxbsrgsegrsdrgsevsfgb  xbsrgsegrsdrgs  evsfgbxbsrgsegrsdrgv
+                </div> 
             </div>
-
+            
            
           
         </div>

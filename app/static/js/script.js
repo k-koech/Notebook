@@ -5,3 +5,4 @@ $(document).ready(function(){
         closestBtn.next("#comments").slideToggle(100)
     });
 });
+

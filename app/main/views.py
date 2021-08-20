@@ -23,12 +23,11 @@ def index():
     '''
     View root page function that returns the index page and its data
     '''
-
-
-    title = 'Home - Welcome to The best Movie Review Website Online'
+    title = 'Home - Welcome to One Minute Pitches'
     pitches= Pitch.query.order_by(Pitch.id.asc())
+    comments = Comments.query.all()
     print(pitches)
-    return render_template('index.html', title = title, pitches=pitches)
+    return render_template('index.html', title = title, pitches=pitches, comments=comments)
 
 # @main.route('/search/<movie_name>')
 # def search(movie_name):
@@ -54,6 +53,22 @@ def pitch():
         return redirect(url_for('main.index' ))
     else:
         return redirect(url_for('main.index' ))
+
+
+@main.route('/comment/<id>', methods = ['GET','POST'])
+@login_required
+def comment(id):
+    '''
+    comments view that inserts comments to the database
+    '''   
+    if request.method=="POST":
+        comment = request.form['comment']
+        new_comment = Comments(pitch_id=id, comment=comment, user_id=current_user.id )
+        db.session.add(new_comment)
+        db.session.commit()
+        flash('Comment posted')
+        return redirect(url_for('main.index' ))
+    return redirect(url_for('main.index' ))
 
 
 @main.route('/upvote/<id>', methods = ['GET','POST'])

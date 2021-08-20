@@ -7,7 +7,7 @@
   {% include 'landing-page.html' %}
 {% endblock %} 
 
-<div class="container ">
+<div id="pitches" class="container ">
   <div class="row m-3 pt-3">
     <div class="col-md-7">
         <div class="add-btn">
@@ -101,10 +101,11 @@
     </div>
     
   </div>
+  
 </div>
-
-
-
+{% block footer %}
+    {% include 'footer.html' %}
+{% endblock %}
 
 
 {% endblock%}

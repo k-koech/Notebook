@@ -7,16 +7,47 @@
         {% else %}
         <title> Pitches </title>
         {% endif %}
+        <link href="https://fonts.googleapis.com/css2?family=Roboto" rel="stylesheet">
+
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"  />
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/index.css', v=0.01)}}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/footer.css', v=0.01)}}">
     <style>
+  /* NAVBAR */
+ 
+ .navbar-brand .fa
+ {
+   color: rgb(247, 78, 0);
+ }
+ .navbar ul li
+ { 
+   font-size: 16px;
+ }
+ /* landing page */
+ .landing-page
+ {
+   height: 85vh;
+ }
+ .landing-page .row1
+ {
+   height: 100% !important;
+ }
+ .landing-page .row1 img
+ {
+   height: 90%;
+   width: auto;
+ }
+  /* index.css */
+html
+{
+  scroll-behavior: smooth;
+}
 .votes
 {
   justify-content: center;
   align-items: center;
 }
-
 
 .add-btn
 {
@@ -52,6 +83,131 @@
   content: "Enter your comment";
   color: gray;
 }
+
+/* footer */
+#footer
+{
+	background-image: linear-gradient(to right,#1a0404, #000000); 
+	color:#fff;
+}
+.footer-box #map {
+    height: 200px;
+    width: 100%;
+    background-color: rgb(214, 210, 206);
+  }
+.footer-img
+{
+	width: 100%;
+}
+.footer-box
+{
+	padding: 20px;
+}
+.footer-box img
+{
+	width: 120px;margin-bottom: 20px;
+}
+
+.footer-box i 
+{
+ margin-right: 8px;
+ font-size: 25px;
+ height: 40px;
+ width: 40px;text-align: center;
+ border-radius: 2px;
+ padding-top: 7px;
+ background-image: linear-gradient(to right,#500606, #460b02);
+}
+.footer-box .form-control
+{
+	box-shadow: none !important;
+	border:none;
+	border-radius: 0;
+	max-width: 250px;
+	margin-top: 25px;
+}
+.footer-box .btn-dark
+{
+box-shadow: none !important;
+	border:none;
+	border-radius: 0;
+	margin-top: 30px;
+}
+.copyright
+{
+	padding-bottom: 3em;
+    margin-bottom: 0;
+	text-align: center;
+	padding-bottom: 20px;
+}
+
+#footer h4
+{
+    font-size: 1.3em;
+   text-align: center;
+   padding: 1%;
+}
+
+#footer #social-media
+{
+    text-align: center;
+    margin: 1em;
+}
+#footer #social-media a
+{
+    padding: 2%;
+    color: white;
+}
+#footer #social-media a:hover
+{
+    color: #A21D00;
+}
+#footer #social-media i
+{
+    font-size: larger;
+} 
+
+#footer .float
+{
+	position:fixed;
+	width:50px;
+	height:50px;
+	bottom:40px;
+	right:3%;
+	background-color:#0C9;
+	color:#FFF;
+	border-radius:50px;
+	text-align:center;
+	box-shadow: 2px 2px 3px #999;
+    display: flex;
+}
+#footer a
+{
+   text-decoration: none;
+}
+#footer .my-float{
+	margin:auto;
+    font-size: 1.2em;
+}
+#footer .backToTop 
+{
+  position:fixed;
+	width:50px;
+	height:50px;
+	bottom:40px;
+	right:10%;
+	background-color:#0C9;
+	color:#FFF;
+	border-radius:50px;
+	text-align:center;
+	box-shadow: 2px 2px 3px #999;
+    display: flex;
+}
+#footer .backToTop .toTop
+{
+	margin:auto;
+    font-size: 1.2em;
+}
     </style>
     </head>
     <body>
@@ -59,15 +215,15 @@
     {% block navbar %}
         {% include 'navbar.html' %}
     {% endblock %}
-
+   
   
         <!-- Content block -->
         {% block content %}
 
         {% endblock%}
 
-        {% block navbar %}
-          {% include 'navbar.html' %}
+        {% block footer %}
+          {% include 'footer.html' %}
         {% endblock %}
         <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>

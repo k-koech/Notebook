@@ -65,7 +65,6 @@ class Comments(db.Model):
 class Feedback(db.Model):
     __tablename__ = 'feedback'
     id = db.Column(db.Integer,primary_key = True)
-    title = db.Column(db.String(100))
     feedback = db.Column(db.Text)
     user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
     date_posted = db.Column(db.DateTime,default=datetime.utcnow)

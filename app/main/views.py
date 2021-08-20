@@ -1,7 +1,7 @@
 from flask import render_template,request,redirect,url_for, abort, flash
 from . import main
 from sqlalchemy import asc
-from ..models import  Pitch, User, Comments
+from ..models import  Feedback, Pitch, User, Comments
 from flask_login import login_required, current_user
 from .forms import ReviewForm,UpdateProfile
 from .. import db, photos
@@ -67,6 +67,21 @@ def comment(id):
         db.session.add(new_comment)
         db.session.commit()
         flash('Comment posted')
+        return redirect(url_for('main.index' ))
+    return redirect(url_for('main.index' ))
+
+@main.route('/feedback', methods = ['GET','POST'])
+@login_required
+def feedback():
+    '''
+    A function to save feedbacks to the database
+    '''   
+    if request.method=="POST":
+        feedback = request.form['feedback']
+        new_feedback = Feedback(feedback=feedback, user_id=current_user.id )
+        db.session.add(new_feedback)
+        db.session.commit()
+        flash('Your feedback has been received! Thank you!')
         return redirect(url_for('main.index' ))
     return redirect(url_for('main.index' ))
 

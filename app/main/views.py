@@ -4,7 +4,9 @@ from sqlalchemy import asc
 from ..models import  Feedback, Pitch, User, Comments
 from flask_login import login_required, current_user
 from .forms import UpdateProfile
-from .. import db
+from .. import db,app
+from PIL import Image
+import os, secrets
 
 
 # Views
@@ -24,16 +26,6 @@ def index():
     print(pitches)
     return render_template('index.html', title = title, pitches=pitches, comments=comments,pickup_pitches=pickup_pitches,interview_pitches=interview_pitches,
     product_pitches=product_pitches,promotion_pitches=promotion_pitches )
-
-
-@main.route('/user/<uname>')
-def profile(uname):
-    title = uname
-    form = UpdateProfile()
-    user = User.query.filter_by(username = uname).first()
-    if user is None:
-        abort(404)
-    return render_template("profile/profile.html", user = user, title=title, form=form)
 
 
 @main.route('/pitch/new', methods = ['GET','POST'])
@@ -65,6 +57,7 @@ def comment(id):
         flash('Comment saved')
         return redirect(url_for('main.index' ))
     return redirect(url_for('main.index' ))
+
 
 @main.route('/feedback', methods = ['GET','POST'])
 @login_required
@@ -104,12 +97,11 @@ def upvote(id):
 @login_required
 def downvote(id):
     '''
-    View movie page function that returns the movie details page and its data
+    Downvote function that saves the downvotes
     '''   
     if request.method=="POST":
         get_downvotes = Pitch.query.filter_by(id=id).first_or_404()
         votes = get_downvotes.downvotes-1
-        print(get_downvotes)
 
         newUpvote = Pitch.query.filter_by(id=id).update({"downvotes": votes})
         db.session.commit()
@@ -117,6 +109,32 @@ def downvote(id):
 
     return redirect(url_for('main.index' ))
 
+
+@main.route('/user/<uname>')
+@login_required
+def profile(uname):
+    title = uname
+    form = UpdateProfile()
+    pitches= Pitch.query.order_by(Pitch.id.asc())
+    user = User.query.filter_by(username = uname).first()
+    if user is None:
+        abort(404)
+    return render_template("profile/profile.html", user = user, title=title, form=form, pitches=pitches)
+
+
+
+def save_picture(form_picture):
+    random_hex=secrets.token_hex(8)
+    _, f_ext=os.path.splitext(form_picture.filename)
+    picture_fn = random_hex + f_ext
+    picture_path = os.path.join(app.root_path,'static/profile_images',picture_fn)
+    
+    output_size=(125,125)
+    i = Image.open(form_picture)
+    i.thumbnail(output_size)
+
+    i.save(picture_path)
+    return picture_fn
 @main.route('/user/<uname>/update',methods = ['GET','POST'])
 @login_required
 def update_profile(uname):
@@ -125,14 +143,19 @@ def update_profile(uname):
         abort(404)
 
     form = UpdateProfile()
-
     if form.validate_on_submit():
-        user.bio = form.bio.data
-        db.session.add(user)
-        db.session.commit()
+        if form.picture.data:
+            pic_file = save_picture(form.picture.data)
+            user.image_file = pic_file
+            user.bio = form.bio.data
+            db.session.add(user)
+            db.session.commit()
+        flash('Profile Updated successfully!')
         return redirect(url_for('.profile',uname=user.username))
 
-    return render_template('profile/update.html',form =form)
+    if request.get == "GET":
+        form.data.bio = current_user.bio
+        return render_template('profile/update.html',form =form)
 
 
 

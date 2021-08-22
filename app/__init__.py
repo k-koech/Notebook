@@ -15,6 +15,7 @@ bootstrap = Bootstrap()
 db = SQLAlchemy()
 # photos = UploadSet('photos',IMAGES)
 mail = Mail()
+app = Flask(__name__)
 
 
 def create_app(config_name):

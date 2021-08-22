@@ -16,7 +16,7 @@ class Config:
     MAIL_PASSWORD ="kelvin97"    
 
 class TestConfig(Config):
-    pass
+    pass 
 class ProdConfig(Config):
     '''
     Production  configuration child class
@@ -34,6 +34,7 @@ class DevConfig(Config):
     Args:
         Config: The parent configuration class with General configuration settings
     '''
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://postgres:kkkk@localhost/flaskmovie'
     DEBUG = True
 
 config_options = {

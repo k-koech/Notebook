@@ -16,8 +16,7 @@ class Config:
     MAIL_PASSWORD ="kelvin97"    
 
 class TestConfig(Config):
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://postgres:kkkk@localhost/flaskmovie'
- 
+    pass
 class ProdConfig(Config):
     '''
     Production  configuration child class

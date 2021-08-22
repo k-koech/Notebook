@@ -3,7 +3,7 @@ from . import main
 from sqlalchemy import asc
 from ..models import  Feedback, Pitch, User, Comments
 from flask_login import login_required, current_user
-from .forms import ReviewForm,UpdateProfile
+from .forms import UpdateProfile
 from .. import db
 
 
@@ -29,10 +29,11 @@ def index():
 @main.route('/user/<uname>')
 def profile(uname):
     title = uname
+    form = UpdateProfile()
     user = User.query.filter_by(username = uname).first()
     if user is None:
         abort(404)
-    return render_template("profile/profile.html", user = user, title=title)
+    return render_template("profile/profile.html", user = user, title=title, form=form)
 
 
 @main.route('/pitch/new', methods = ['GET','POST'])
@@ -116,15 +117,6 @@ def downvote(id):
 
     return redirect(url_for('main.index' ))
 
-# @main.route('/review/<int:id>')
-# def single_review(id):
-#     review=Review.query.get(id)
-#     if review is None:
-#         abort(404)
-#     format_review = markdown2.markdown(review.movie_review,extras=["code-friendly", "fenced-code-blocks"])
-#     return render_template('review.html',review = review,format_review=format_review)
-
-
 @main.route('/user/<uname>/update',methods = ['GET','POST'])
 @login_required
 def update_profile(uname):
@@ -136,13 +128,13 @@ def update_profile(uname):
 
     if form.validate_on_submit():
         user.bio = form.bio.data
-
         db.session.add(user)
         db.session.commit()
-
         return redirect(url_for('.profile',uname=user.username))
 
     return render_template('profile/update.html',form =form)
+
+
 
 @main.route('/user/<uname>/update/pic',methods= ['POST'])
 @login_required
@@ -156,9 +148,3 @@ def update_pic(uname):
     return redirect(url_for('main.profile',uname=uname))
 
 
-@main.route('/uploader', methods = ['GET', 'POST'])
-def upload_file():
-   if request.method == 'POST':
-      f = request.files['file']
-      return 'file uploaded successfully'
-   return redirect(url_for('main.profile'))

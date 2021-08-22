@@ -4,7 +4,7 @@ from sqlalchemy import asc
 from ..models import  Feedback, Pitch, User, Comments
 from flask_login import login_required, current_user
 from .forms import ReviewForm,UpdateProfile
-from .. import db, photos
+from .. import db
 
 
 # Views
@@ -149,8 +149,16 @@ def update_profile(uname):
 def update_pic(uname):
     user = User.query.filter_by(username = uname).first()
     if 'photo' in request.files:
-        filename = photos.save(request.files['photo'])
-        path = f'photos/{filename}'
-        user.profile_pic_path = path
+        # filename = photos.save(request.files['photo'])
+        # path = f'photos/{filename}'
+        # user.profile_pic_path = path
         db.session.commit()
     return redirect(url_for('main.profile',uname=uname))
+
+
+@main.route('/uploader', methods = ['GET', 'POST'])
+def upload_file():
+   if request.method == 'POST':
+      f = request.files['file']
+      return 'file uploaded successfully'
+   return redirect(url_for('main.profile'))

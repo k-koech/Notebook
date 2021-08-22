@@ -9,8 +9,8 @@
     <img src="{{url_for('static',filename=user.profile_pic_path)}}" alt="" class="img-thumbnail">
 
     {%else%}
-    <p>No profile picture</p>
-
+    <img width="100" height="100" src="{{url_for('static',filename='profile_photos/default.png')}}" alt="" class="img-thumbnail">
+  <h2>noo</h2>
     {% endif %}
 
         {% if user == current_user %}
@@ -19,6 +19,12 @@
       <input type="file"  name="photo" class="form-control" required>
       <input type="submit">
     </form>
+
+    <form action = "http://localhost:5000/uploader" method = "POST" 
+    enctype = "multipart/form-data">
+    <input type = "file" name = "file" />
+    <input type = "submit"/>
+ </form>
       {% endif %}
   </div>
   
@@ -27,13 +33,13 @@
     {% if user == current_user %}
      <a href="{{url_for('main.update_profile',uname=user.username)}}">Edit profile</a>
     {% endif %}
-    <h3> {{user.username| capitalize}} </h3>
+    <h3> {{user.username| upper}} </h3>
 
     <!--Displaying user bio-->
     {% if user.bio %}
       <p> {{user.bio}}</p>
     {%else%}
-      <p> {{user.username| capitalize}} has no bio </p>
+      <p> {{user.username| upper}} has no bio </p>
     {% endif %}
   </div>
 

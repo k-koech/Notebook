@@ -14,11 +14,15 @@ class Config:
     MAIL_USE_SSL = True
     MAIL_USERNAME = "triplek901@gmail.com"
     MAIL_PASSWORD ="kelvin97"   
+    MAIL_DEBUG = True
+    MAIL_SUPPRESS_SEND = False
+    TESTING = False
     """ SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://postgres:kkkk@localhost/flaskmovie'
  """
 
 class TestConfig(Config):
     pass 
+
 class ProdConfig(Config):
     '''
     Production  configuration child class

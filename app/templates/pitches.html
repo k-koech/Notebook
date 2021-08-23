@@ -9,11 +9,12 @@
               <span class="pitch">{{ pitch.pitch }}</span>
               <i class="fa fa-quote-right fa-" aria-hidden="true"></i>
         </h5>
-        <div class="row mt-5">
+        <hr>
+        <div class="row mt-0">
             <div class="col-md-6"><button class="btn">{{ pitch.date_posted.strftime('%Y-%m-%d') }}</button></div>
-            <div class="col-md-6"><button class="btn"><i>Posted by </i>{{ pitch.user.username }}</button></div>    
+            <div class="col-md-6"><button class="btn"><i></i>{{ pitch.user.username }}</button></div>    
         </div>
-       
+        
         <p class="commentBtn">Comments <i class="fa fa-caret-down" aria-hidden="true"></i></p>
         <div id="comments" class="row ">
                          

@@ -17,6 +17,7 @@ class Config:
     MAIL_DEBUG = True
     MAIL_SUPPRESS_SEND = False
     TESTING = False
+    SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
  
 
 class TestConfig(Config):
@@ -32,7 +33,6 @@ class ProdConfig(Config):
     '''
     SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
     
-
 
 class DevConfig(Config):
     '''

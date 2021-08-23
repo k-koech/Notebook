@@ -17,11 +17,10 @@ class Config:
     MAIL_DEBUG = True
     MAIL_SUPPRESS_SEND = False
     TESTING = False
-    """SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://postgres:kkkk@localhost/flaskmovie'
-"""
+ 
 
 class TestConfig(Config):
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://postgres:kkkk@localhost/flaskmovie'
+    pass
 
 
 class ProdConfig(Config):
@@ -42,7 +41,6 @@ class DevConfig(Config):
     Args:
         Config: The parent configuration class with General configuration settings
     '''
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://postgres:kkkk@localhost/flaskmovie'
     DEBUG = True
 
 config_options = {

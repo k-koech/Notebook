@@ -9,12 +9,12 @@
               <span class="pitch">{{ pitch.pitch }}</span>
               <i class="fa fa-quote-right fa-" aria-hidden="true"></i>
         </h5>
-        <hr>
-        <div class="row mt-0">
-            <div class="col-md-6"><button class="btn">{{ pitch.date_posted.strftime('%Y-%m-%d') }}</button></div>
-            <div class="col-md-6"><button class="btn"><i></i>{{ pitch.user.username }}</button></div>    
-        </div>
         
+        <div class="row mt-2">
+            <div class="col-md-6 text-secondary"><button class="btn">{{ pitch.date_posted.strftime('%Y-%m-%d') }}</button></div>
+            <div class="col-md-6 text-secondary"><button class="btn"><i></i>{{ pitch.user.username }}</button></div>    
+        </div>
+        <hr>
         <p class="commentBtn">Comments <i class="fa fa-caret-down" aria-hidden="true"></i></p>
         <div id="comments" class="row ">
                          
@@ -26,9 +26,21 @@
                     <button type="submit" class="btn btn-secondary">Submit</button>
                 </div> 
             </form>
+            <h6 class="m-2 font-weight-bold">Comments</h6>
              {% for comment in comments %}
                 {% if comment.pitch_id==pitch.id %}
-                  <div class="row bg-light">{{ comment.comment }}</div>  
+                
+                  <div class="row display-comments mx-3 mb-2 mt-2 p-3">
+                    <div class="col-md-2">
+                        <img width="40" height="40" src="{{url_for('static',filename='profile_photos/default.png')}}" alt="" class="rounded">
+                     </div> 
+                     <div class="col-md-10">
+                         <h6 class="font-weight-bold">{{ comment.user.username }}</h6>
+                         <p>{{ comment.comment }}</p> 
+                     </div>
+                              
+                </div>  
+                  
                 {% endif %}
              {% endfor %}                               
          </div>      

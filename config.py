@@ -17,8 +17,8 @@ class Config:
     MAIL_DEBUG = True
     MAIL_SUPPRESS_SEND = False
     TESTING = False
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://postgres:kkkk@localhost/flaskmovie'
-
+    """SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://postgres:kkkk@localhost/flaskmovie'
+"""
 
 class TestConfig(Config):
     SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://postgres:kkkk@localhost/flaskmovie'
@@ -31,7 +31,8 @@ class ProdConfig(Config):
     Args:
         Config: The parent configuration class with General configuration settings
     '''
-    SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
+    """SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL") """
+    pass
 
 
 class DevConfig(Config):

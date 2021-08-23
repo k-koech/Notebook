@@ -20,6 +20,7 @@ def register():
         db.session.commit()
 
         mail_message("Welcome to Pitches","email/welcome_user",user.email,user=user)
+        flash('Account successfully! Please Login')
         return redirect(url_for('auth.login'))
     return render_template('auth/register.html',registration_form = form)
 

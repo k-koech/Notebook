@@ -6,17 +6,8 @@ class Config:
     General configuration parent class
     '''
     SECRET_KEY = '<Flask WTF Secret Key>'
-    
-    #  email configurations
-    MAIL_USE_SSL = True
-    MAIL_SERVER = 'smtp.gmail.com' 
-    MAIL_PORT = 465
-    MAIL_USE_TLS = False
-    MAIL_USERNAME = "kalambanidouglas@gmail.com"
-    MAIL_PASSWORD ="kalambani97?"   
-    MAIL_DEBUG = True
-    MAIL_SUPPRESS_SEND = False
-    TESTING = False
+      
+  
     SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
  
 
@@ -31,6 +22,14 @@ class ProdConfig(Config):
     Args:
         Config: The parent configuration class with General configuration settings
     '''
+      #  email configurations
+    MAIL_USE_SSL = True
+    MAIL_SERVER = 'smtp.gmail.com' 
+    MAIL_PORT = 465
+    MAIL_USE_TLS = False
+    MAIL_USERNAME = "kalambanidouglas@gmail.com"
+    MAIL_PASSWORD ="kalambani97?" 
+    
     SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
     
 

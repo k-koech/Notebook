@@ -5,10 +5,7 @@ class Config:
     '''
     General configuration parent class
     '''
-    SECRET_KEY = '<Flask WTF Secret Key>'
-      
-  
-    SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
+    SECRET_KEY = 'jihesgvuys'
  
 
 class TestConfig(Config):
@@ -21,15 +18,7 @@ class ProdConfig(Config):
 
     Args:
         Config: The parent configuration class with General configuration settings
-    '''
-      #  email configurations
-    MAIL_USE_SSL = True
-    MAIL_SERVER = 'smtp.gmail.com' 
-    MAIL_PORT = 465
-    MAIL_USE_TLS = False
-    MAIL_USERNAME = "kalambanidouglas@gmail.com"
-    MAIL_PASSWORD ="kalambani97?" 
-    
+    '''    
     SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
     
 
@@ -40,6 +29,7 @@ class DevConfig(Config):
     Args:
         Config: The parent configuration class with General configuration settings
     '''
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://postgres:kkkk@localhost/flaskmovie'
     DEBUG = True
 
 config_options = {

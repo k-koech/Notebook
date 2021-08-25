@@ -1,5 +1,0 @@
-Hello {{user.username}}
-Welcome to 1 minute Pitches.
-We have just seen you have signed up for our application and want to welcome you to the family.
-Please enjoy the pitches and review them.
-Once again welcome.

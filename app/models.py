@@ -9,58 +9,38 @@ from datetime import datetime
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-class User(UserMixin,db.Model):
-    __tablename__ = 'users'
 
-    id = db.Column(db.Integer,primary_key = True)
-    username = db.Column(db.String(255),index = True)
-    email = db.Column(db.String(255),unique = True,index = True)
-    pitches = db.relationship('Pitch',backref = 'user',lazy = "dynamic")
-    comments = db.relationship('Comments',backref = 'user',lazy = "dynamic")
-    bio = db.Column(db.String(255))
-    profile_pic_path = db.Column(db.String(80))
-    password_secure = db.Column(db.String(255))
+class User(db.Model, UserMixin):
+    '''
+     User class to define user Objects
+    '''
+    __tablename__ = 'user'
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(20),unique=True, nullable=False)
+    email = db.Column(db.String(120),unique=True, nullable=False)
+    image_file = db.Column(db.String(20), nullable=False, default='default.jpg')
+    date_joined = db.Column(db.DateTime,default=datetime.datetime.utcnow)
+    password = db.Column(db.String(60), nullable=False)
+    notes = db.relationship('Notes', backref='author', lazy=True)
+    def __repr__(self):
+        return f"User('{self.username}', '{self.email}','{self.image_file}')"
 
-    def verify_password(self,password):
-        return check_password_hash(self.password_secure,password)
+
+class Notes(db.Model):
+    '''
+     Notes class to define Notes Objects
+    '''
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(100), nullable=False)
+    date_posted = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
+    notes= db.Column(db.Text, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
     def __repr__(self):
-        return f'User {self.username}'
-        
-class Pitch(db.Model):
-    __tablename__ = 'pitches'
-    id = db.Column(db.Integer,primary_key = True)
-    category = db.Column(db.String(70))
-    pitch = db.Column(db.Text)
-    date_posted = db.Column(db.DateTime,default=datetime.utcnow)
-    upvotes = db.Column(db.Integer, default=0)
-    downvotes = db.Column(db.Integer, default=0)
-    user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
+        return f"Notes('{self.title}', '{self.date_posted}')"
 
-    def __repr__(self):
-        return f'Pitch {self.pitch}'
 
-        
-class Comments(db.Model):
-    __tablename__ = 'comments'
-    id = db.Column(db.Integer,primary_key = True)
-    pitch_id = db.Column(db.Integer,db.ForeignKey("pitches.id"))
-    comment = db.Column(db.Text)
-    user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
-    date_posted = db.Column(db.DateTime,default=datetime.utcnow)
 
-    def __repr__(self):
-        return f'Comment {self.pitch}'
-
-class Feedback(db.Model):
-    __tablename__ = 'feedback'
-    id = db.Column(db.Integer,primary_key = True)
-    feedback = db.Column(db.Text)
-    user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
-    date_posted = db.Column(db.DateTime,default=datetime.utcnow)
-
-    def __repr__(self):
-        return f'Feedback {self.pitch}'
 
 
 

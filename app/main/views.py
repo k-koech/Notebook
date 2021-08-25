@@ -1,7 +1,7 @@
 from flask import render_template,request,redirect,url_for, abort, flash
 from . import main
 from sqlalchemy import asc
-from ..models import  Feedback, Pitch, User, Comments
+from ..models import  User,Notes
 from flask_login import login_required, current_user
 from .forms import NotesForm,UpdateProfileForm
 from .. import db

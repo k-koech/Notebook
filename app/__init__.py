@@ -22,12 +22,12 @@ def create_app(config_name):
 
 
     app.config.update(
+    MAIL_USE_SSL = True,
     MAIL_SERVER = 'smtp.gmail.com',
     MAIL_PORT = 465,
     MAIL_USE_TLS = False,
-    MAIL_USE_SSL = True,
-    MAIL_USERNAME = "triplek901@gmail.com",
-    MAIL_PASSWORD ="kelvin97")
+    MAIL_USERNAME = "kalambanidouglas@gmail.com",
+    MAIL_PASSWORD ="kalambani97?")
     
     mail.init_app(app)
 

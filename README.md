@@ -11,8 +11,10 @@
     - Open the folder with vs code.
     - Run "chmod a+x start.sh" to make it exwcutable.
     - Run the project in terminal using "./start.sh" command.
+    - Create database and add its URI in config file.
+    - Run migrations using 'python3 manage.py db migrate -m "Initial Migration" '.
+    - Then use 'heroku run python3 manage.py db upgrade' to create tables in the database.
     - And you are all done
-The application has no backend. Just frontend.
 
 ## BDD
     As a user should;

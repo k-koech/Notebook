@@ -21,7 +21,14 @@ def index():
 @main.route('/notes/new', methods = ['GET','POST'])
 @login_required
 def new_note():
-    
+    form = NotesForm()
+    if form.validate_on_submit():
+        new_notes = Notes(title = form.title.data, notes=form.notes.data, user_id=current_user.id)
+        db.session.add(new_notes)
+        db.session.commit()
+        flash("Notes save successfully!", "success")
+        return redirect(url_for('main.index'))
+    return render_template('create_note.html',legend="TAKE NOTES", title = "New Note", form=form)
 
 
 

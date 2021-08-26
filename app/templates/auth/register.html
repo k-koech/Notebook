@@ -1,14 +1,13 @@
 {% extends 'base.html'%}
 {% import 'bootstrap/wtf.html' as wtf%}
-
 {% block content %}
 <div class="container">
 <div class="row">
 <div class="col-md-3 mr-1"> </div>
-<div class="col-md-5 register-col rounded mt-5 pt-4 pb-3 px-2">  
-    <h4 class="font-weight-600 m-4 text-center ">Register</h4>
+<div class="col-md-5 register-col rounded mt-5 pt-4 pb-3 px-2">
     
-    <form method="POST" action="" class=" px-auto">
+    <h4 class="font-weight-600 m-4 text-center ">Register</h4>
+    <form method="POST" action="/authenticate/register" class=" px-auto">
         {{ form.hidden_tag() }}
         <div class="form-group row mb-4  px-auto px-1">
             {{ form.email.label(class="col-sm-4 ml-1 col-form-label") }}
@@ -22,12 +21,9 @@
             {% else %}
                 {{ form.email(class="form-control col-sm-7") }}
             {% endif %}
-          
         </div>
-
         <div class="form-group row mb-4">
             {{ form.username.label(class="form-control-label col-sm-4 ml-1") }}
-
             {% if form.username.errors %}
                 {{ form.username(class="form-control-label col-sm-7 is-invalid") }}
                 <div class="invalid-feedback">
@@ -65,18 +61,14 @@
                 {{ form.confirm_password(class="form-control col-sm-7") }}
             {% endif %}
         </div>
-       
         <div class="form-group row ">
             <div class="col-sm-4 ml-1"></div>
             <div class="col-sm-7 ml-1">{{ form.submit(class="btn btn-primary px-4") }}</div>
         </div>
     </form>
-    
     <p class="ml-5 mt-2 mb-2 text-center"> Already have an account <a href="/authenticate/login">Login</a></p>
-
 </div>
 <div class="col-md-3 ml-1"></div>
 </div>
 </div>
-
 {% endblock%}

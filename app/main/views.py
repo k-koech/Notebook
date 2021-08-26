@@ -36,3 +36,12 @@ def profile(username):
     form=UpdateProfileForm()
     return render_template('profile.html', title = "New Note", form=form)
 
+"""DELETE NOTES"""
+@main.route('/notes/delete/<id>', methods = ['POST'])
+@login_required
+def delete_notes(id):
+    notes = Notes.query.get_or_404(id)
+    db.session.delete(notes)
+    db.session.commit()
+    flash("Notes deleted", "success")
+    return redirect(url_for("main.index"))

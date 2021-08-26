@@ -40,19 +40,6 @@ class Notes(db.Model):
     def __repr__(self):
         return f"Notes('{self.title}', '{self.date_posted}')"
 
-class Subscriber(db.Model):
-
-    __tablename__ = 'subscribers'
-    id = db.Column(db.Integer,primary_key=True)
-    email = db.Column(db.String(255),unique=True,index=True)
-
-    def save_subscriber(self):
-        db.session.add(self)
-        db.session.commit()
-
-    def__repr__(self):
-        return f'Subscriber {self.email}'
-
 
 
 

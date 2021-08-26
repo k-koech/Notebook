@@ -4,8 +4,12 @@
             
         </a>
         <div class="text-center mx-auto ">
-            <img class="rounded-circle mt-2 " width="50" height="50" src="{{ url_for('static', filename='images/default.jpg') }}">
-            <h6 class="m-2">Triple K</h6>
+          {% if current_user.image_file %}
+            <img class="rounded-circle mt-2"  width="50" height="50" src="{{url_for('static',filename="/images/"+current_user.image_file)}}" alt="" class="rounded">
+          {%else%}
+            <img class="rounded-circle mt-2" width="50" height="50" src="{{ url_for('static', filename='images/default.jpg') }}">
+          {% endif %}
+            <h6 class="m-2">{{current_user.username}}</h6>
         </div>
         <hr class="text-white">
         <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
@@ -20,14 +24,14 @@
                     <span class="ms-1 d-none d-sm-inline">Create Notes</span> </a>
             </li>
             <li>
-                <a href="/profile/2" class="nav-link px-0 align-middle">
+                <a href="/profile" class="nav-link px-0 align-middle">
                     <i class="fa fa-user ml-4 mr-2" aria-hidden="true"></i> <span class="ms-1 d-none d-sm-inline">Profile</span></a>
             </li>
           
         </ul>
     
         <div class="sidebarIcons">
-            <a href="/profile/2" class="nav-link px-0 align-middle">
+            <a href="/profile" class="nav-link px-0 align-middle">
                 <span class="ms-1 d-none d-sm-inline">
                     <div class="sidebar-icons">
                         <i class="bi bi-facebook"></i>

@@ -17,13 +17,12 @@ def index():
     '''
     return render_template('index.html', title ="Home")
 
-
 """NEW NOTES VIEW"""
 @main.route('/notes/new', methods = ['GET','POST'])
-# @login_required
+@login_required
 def new_note():
-    form = NotesForm()
-    return render_template('create_note.html', title = "New Note", form=form)
+    
+
 
 
 """PROFILE NOTES VIEW"""

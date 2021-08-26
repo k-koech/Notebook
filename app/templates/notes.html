@@ -1,14 +1,18 @@
 {% extends 'base.html'%}
 {% block content %}
 <div class="row flex-nowrap">
+
   {% block sidebar %}
       {% include 'sidebar.html' %}
   {% endblock %}
+
 <div class="col py-3 mx-5 mt-2">
 <div class="row mx-5">
   <div class="col-md-9 pt-1 profile-col pt-3">
+
     {% with messages=get_flashed_messages(with_categories=true) %}
     {% if messages %}
+    
         {% for category, message in messages %}
         {% if category=="success" %}
             <div class="alert alert-success ">

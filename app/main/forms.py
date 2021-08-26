@@ -29,6 +29,7 @@ class UpdateProfileForm(FlaskForm):
             user = User.query.filter_by(email=email.data).first()
             if user:
                 raise ValidationError("Email has already been registered")
+                
 class CreateNote(FlaskForm):
     title = StringField('Title',validators=[Required()])
     content = TextAreaField('Note content',validators=[Required()])

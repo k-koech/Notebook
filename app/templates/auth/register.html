@@ -24,21 +24,19 @@
     <form method="POST" action="/authenticate/register" class=" px-auto">
         {{ form.hidden_tag() }}
         <div class="form-group row mb-4  px-auto px-1">
-           
-        </div>
-        <div class="form-group row mb-4">
-            {{ form.username.label(class="form-control-label col-sm-4 ml-1") }}
-            {% if form.username.errors %}
-                {{ form.username(class="form-control-label col-sm-7 is-invalid") }}
+            {{ form.email.label(class="col-sm-4 ml-1 col-form-label") }}
+            {% if form.email.errors %}
+                {{ form.email(class="form-control is-invalid col-sm-7") }}
                 <div class="invalid-feedback">
-                    {% for error in form.username.errors %}
+                    {% for error in form.email.errors %}
                         <span>{{ error }}</span>
                     {% endfor %}
                 </div>
             {% else %}
-                {{ form.username(class="form-control col-sm-7") }}
+                {{ form.email(class="form-control col-sm-7") }}
             {% endif %}
         </div>
+        
         <div class="form-group row mb-4">
             {{ form.password.label(class="form-control-label col-sm-4 ml-1") }}
             {% if form.password.errors %}

@@ -30,8 +30,6 @@ def new_note():
         return redirect(url_for('main.index'))
     return render_template('create_note.html',legend="TAKE NOTES", title = "New Note", form=form)
 
-
-
 """PROFILE NOTES VIEW"""
 @main.route('/profile/<username>', methods = ['GET','POST'])
 # @login_required

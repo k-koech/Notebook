@@ -1,17 +1,12 @@
 {% extends 'base.html'%}
-
 <!-- Content block -->
 {% block content %}
-
-
-<div class="row flex-nowrap">  
+<div class="row flex-nowrap">
 {% block sidebar %}
     {% include 'sidebar.html' %}
 {% endblock %}
-
 <div class="col py-3 mx-5 mt-5">
     <h3 class="font-weight-bold">NOTES</h3>
-
     <div class="row p-2 mt-3 mb-2 rounded notes">
         <div class="col-sm-2 icon">
             <i class="fa fa-clipboard fa-2x " aria-hidden="true"></i>
@@ -21,14 +16,10 @@
             <p class="lead">An example 2-level sidebar with collasible menu items. The menu functions like an "accordion" where only a single menu is be open at a time.</p>
            <p></p>
         </div>
-        
-    </div>    
+    </div>
 </div>
-
 </div>
 {% block footer %}
     {% include 'footer.html' %}
 {% endblock %}
-
-
 {% endblock%}
